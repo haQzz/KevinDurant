@@ -1,0 +1,26 @@
+window.dom = {
+    find(selector,scope) {
+        return (scope || document).querySelectorAll(selector)
+    },
+    style(node,name,value) {
+        //style(div,'color','red')
+        if(arguments.length === 3){
+            node.style[name] = value
+        }else if(arguments.length === 2){
+            if(typeof name === 'string'){
+            //style(div,{color:red})
+            return node.style[name]
+            }else if(name instanceof Object){
+                for(let key in name){
+                    node.style[key] = name[key]
+                }
+            }
+        }
+    },
+    each(nodeList,fn) {
+        let i
+        for(i = 0;i < nodeList.length,i++){
+            fn.call(null,nodeList[i])
+        }
+    }
+}
